@@ -2,9 +2,13 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import useShowsQuery from "./common/services/useShowsQuery";
 
 function App() {
   const [count, setCount] = useState(0);
+  const showsQuery = useShowsQuery();
+  const { data, isLoading, isError } = showsQuery;
+  console.log("showsQuery", data);
 
   return (
     <>
