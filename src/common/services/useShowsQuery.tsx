@@ -22,7 +22,7 @@ interface IShow {
 }
 
 export default function useShowsQuery() {
-  return useQuery<IShow>({
+  return useQuery<IShow[]>({
     queryKey: [SHOWS_KEY],
     queryFn: async () => fetchGet(API_SHOWS_URL),
   });
