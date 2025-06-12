@@ -3,7 +3,6 @@ import useShowsQuery from "../common/services/useShowsQuery";
 
 export default function GlobalLayout() {
   const showsQuery = useShowsQuery();
-  console.log("showsQuery", showsQuery.data);
 
   return (
     <div className="bg-white py-24 sm:py-32">
@@ -25,6 +24,8 @@ export default function GlobalLayout() {
               date={show.event_date}
               image={show.flyer?.data}
               categories={show.categories}
+              venue={show.venue}
+              url={show.url}
             />
           ))}
         </div>

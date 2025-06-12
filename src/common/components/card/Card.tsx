@@ -1,5 +1,7 @@
 import { format, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
+import { MapPinIcon } from "@heroicons/react/24/outline";
+import Button from "../Button";
 
 interface CardProps {
   title: string;
@@ -7,9 +9,19 @@ interface CardProps {
   image: number[];
   key: string;
   categories?: string[];
+  venue?: string;
+  url: string;
 }
 
-const Card = ({ title, date, image, key, categories }: CardProps) => {
+const Card = ({
+  title,
+  date,
+  image,
+  key,
+  categories,
+  venue,
+  url,
+}: CardProps) => {
   return (
     <article key={key} className="flex flex-col items-start justify-between">
       <div className="relative w-full">
@@ -30,21 +42,27 @@ const Card = ({ title, date, image, key, categories }: CardProps) => {
           <time dateTime={date} className="text-gray-500">
             {format(parseISO(date), "dd 'de' MMMM 'de' yyyy", { locale: es })}
           </time>
-          <a
-            href={"#"}
-            className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-          >
+          <p className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
             {categories}
-          </a>
+          </p>
         </div>
         <div className="group relative">
           <h3 className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">
-            <a href={"#"}>
+            <p>
               <span className="absolute inset-0" />
               {title}
-            </a>
+            </p>
           </h3>
-          <p className="mt-5 line-clamp-3 text-sm/6 text-gray-600">"lala"</p>
+          {venue ? (
+            <p className="mt-5 line-clamp-3 text-sm/6 flex gap-2 text-gray-600">
+              <MapPinIcon width={20} /> {venue}
+            </p>
+          ) : (
+            <p className="mt-5 line-clamp-3 text-sm/6 flex gap-2 h-5 text-gray-600"></p>
+          )}
+        </div>
+        <div className="mb-6 mt-6 flex items-center gap-x-4">
+          <Button text="Comprar" url={url} />
         </div>
       </div>
     </article>
