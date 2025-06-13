@@ -33,7 +33,7 @@ const Card = ({
               ""
             )
           )}`}
-          className="w-full rounded-2xl bg-gray-100 sm:aspect-[2/1] lg:aspect-[0/1]"
+          className="w-full rounded-2xl bg-gray-100 sm:aspect-[2/1] lg:aspect-[0.8/1]"
         />
         <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
       </div>
@@ -42,7 +42,7 @@ const Card = ({
           <time dateTime={date} className="text-gray-500">
             {format(parseISO(date), "dd 'de' MMMM 'de' yyyy", { locale: es })}
           </time>
-          <p className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
+          <p className="relative z-10 rounded-full bg-gray-200 px-3 py-1.5 font-medium text-gray-700 hover:bg-gray-100">
             {categories}
           </p>
         </div>
