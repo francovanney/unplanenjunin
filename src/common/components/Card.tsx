@@ -1,7 +1,7 @@
 import { format, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
 import { MapPinIcon } from "@heroicons/react/24/outline";
-import Button from "../Button";
+import Button from "./Button";
 
 interface CardProps {
   title: string;
@@ -42,9 +42,14 @@ const Card = ({
           <time dateTime={date} className="text-gray-500">
             {format(parseISO(date), "dd 'de' MMMM 'de' yyyy", { locale: es })}
           </time>
-          <p className="relative z-10 rounded-full bg-gray-200 px-3 py-1.5 font-medium text-gray-700 hover:bg-gray-100">
-            {categories}
-          </p>
+          {categories?.slice(0, 3).map((category) => (
+            <p
+              key={category}
+              className="relative z-10 rounded-full bg-gray-200 px-3 py-1.5 font-medium text-gray-700 hover:bg-gray-100"
+            >
+              {category}
+            </p>
+          ))}
         </div>
         <div className="group relative">
           <h3 className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">
