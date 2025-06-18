@@ -1,1 +1,1 @@
-export const SHOWS_KEY = "shows";
+export const SHOWS_INFINITE_KEY = "shows-infinite";
