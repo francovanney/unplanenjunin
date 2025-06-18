@@ -16,24 +16,25 @@ const SkeletonCard = () => (
 );
 
 export default function GlobalLayout() {
-  const showsQuery = useShowsQuery();
+  const shows = useShowsQuery();
+  const showsQuery = useMemo(() => shows.data?.data || [], [shows.data]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const categories = useMemo(() => {
-    if (!showsQuery.data) return [];
+    if (!showsQuery) return [];
     const set = new Set<string>();
-    showsQuery.data.forEach((show) => {
+    showsQuery.forEach((show) => {
       show.categories?.forEach((cat: string) => set.add(cat));
     });
     return Array.from(set);
-  }, [showsQuery.data]);
+  }, [showsQuery]);
 
   const filteredShows = useMemo(() => {
-    if (!selectedCategory) return showsQuery.data;
-    return showsQuery.data?.filter((show) =>
+    if (!selectedCategory) return showsQuery;
+    return showsQuery?.filter((show) =>
       show.categories?.includes(selectedCategory)
     );
-  }, [showsQuery.data, selectedCategory]);
+  }, [showsQuery, selectedCategory]);
 
   return (
     <div className="bg-white py-24 sm:py-32">
@@ -52,22 +53,14 @@ export default function GlobalLayout() {
           categories={categories}
           selected={selectedCategory}
           onSelect={setSelectedCategory}
-          isLoading={showsQuery.isLoading}
+          isLoading={shows.isLoading}
         />
 
         <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 pt-10 sm:mt-16 sm:pt-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          {showsQuery.isLoading
+          {shows.isLoading
             ? Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
             : filteredShows?.map((show) => (
-                <Card
-                  key={show.show_id.toString()}
-                  title={show.title}
-                  date={show.event_date}
-                  image={show.flyer?.data}
-                  categories={show.categories}
-                  venue={show.venue}
-                  url={show.url}
-                />
+                <Card show={show} key={show.show_id} />
               ))}
         </div>
       </div>
