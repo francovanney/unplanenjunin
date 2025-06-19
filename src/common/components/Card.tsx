@@ -73,21 +73,17 @@ const Card = ({ show }: CardProps) => {
         {show.venue ? (
           <p className="mt-5 text-sm flex gap-2 text-gray-600">
             <MapPinIcon width={20} />
-            {`${show.venue}${show.city ? `, ${show.city}` : ""}`}
+            {`${show.venue}${show.address ? `, ${show.address}` : ""}`}
           </p>
         ) : (
           <div className="mt-5 h-5" />
         )}
 
+        {show.url && (
         <div className="mt-6 mb-6">
-          {show.url ? (
             <Button text="Comprar" url={show.url} />
-          ) : (
-            <div className="opacity-0">
-              <Button text="Comprar" url="#" />
-            </div>
-          )}
         </div>
+        )}
       </div>
     </article>
   );

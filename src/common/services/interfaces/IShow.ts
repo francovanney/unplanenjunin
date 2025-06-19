@@ -1,5 +1,5 @@
 export interface IShowItem {
-  adress: string;
+  address: string;
   categories: string[];
   city: string;
   completeevent: boolean | null;

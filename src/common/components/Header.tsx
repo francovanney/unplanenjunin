@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Dialog, DialogPanel, PopoverGroup } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import logo from './../../assets/logo.png';
 
 const navigation = [
   { name: "Info Util", href: "#" },
@@ -21,9 +22,11 @@ export default function Header() {
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Que hacer en Junín?</span>
-            <div className="text-sm/6 font-semibold text-gray-900">
-              ¿Que hacer en Junín?
-            </div>
+            <img
+                src={logo}
+                alt="Logo"
+                className="mx-auto w-32 h-auto"
+            />
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -64,7 +67,7 @@ export default function Header() {
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <div className="text-sm/6 font-semibold text-gray-900">
-                ¿Que hacer en Junín?
+                ¿Que hacer en Junín
               </div>
             </a>
             <button
