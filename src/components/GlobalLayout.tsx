@@ -132,7 +132,7 @@ export default function GlobalLayout() {
       {showScrollToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-10 right-10 bg-white rounded-full shadow-lg p-2 transition-opacity hover:bg-gray-100"
+          className="fixed bottom-20 right-10 bg-white rounded-full shadow-lg p-2 transition-opacity hover:bg-gray-100"
           aria-label="Scroll to top"
         >
           <ArrowUpCircleIcon
