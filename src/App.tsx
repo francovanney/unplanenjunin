@@ -1,3 +1,4 @@
+import Footer from "./common/components/Footer";
 import Header from "./common/components/Header";
 import GlobalLayout from "./components/GlobalLayout";
 
@@ -6,6 +7,7 @@ const App = () => {
     <>
       <Header />
       <GlobalLayout />
+      <Footer />
     </>
   );
 };
