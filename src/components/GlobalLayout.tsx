@@ -3,6 +3,7 @@ import { ArrowUpCircleIcon } from "@heroicons/react/24/solid";
 
 import Card from "../common/components/Card";
 import FilterCategories from "../common/components/FilterCategories";
+import flyer from './../assets/flyer.png';
 
 import useShowsInfiniteQuery from "../common/services/useShowsInfiniteQuery";
 import type { IShowItem } from "../common/services/interfaces/IShow";
@@ -84,16 +85,13 @@ export default function GlobalLayout() {
   }, []);
 
   return (
-    <div className="bg-white py-24 sm:py-32 relative">
+    <div className="bg-white py-6 sm:py-6 relative">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 ">
-        <div className="mx-auto max-w-6xl lg:mx-0">
-          <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
-            Un Plan En Junín
-          </h2>
-          <p className="mt-6 text-lg/8 text-gray-600">
-            Conocé los eventos, shows y actividades que no te podés perder.
-          </p>
-        </div>
+            <img
+                src={flyer}
+                alt="Flyer"
+                className="rounded-xl mx-auto w-100 h-auto"
+            />
         <hr className="my-10 border-gray-200" />
 
         <FilterCategories
