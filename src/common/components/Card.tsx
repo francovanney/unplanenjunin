@@ -1,7 +1,12 @@
 import { format, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
-import { MapPinIcon } from "@heroicons/react/24/outline";
+
+import { GlobeAltIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { FaInstagram } from "react-icons/fa";
 import Button from "./Button";
+
 import type { IShowItem } from "../services/interfaces/IShow";
 
 interface CardProps {
@@ -15,25 +20,17 @@ const Card = ({ show }: CardProps) => {
       })
     : null;
 
-  const imageUrl = `data:image/${show.flyer.type};base64,${btoa(
-    new Uint8Array(show.flyer.data).reduce(
-      (data, byte) => data + String.fromCharCode(byte),
-      ""
-    )
-  )}`;
-
   return (
-    <article className="flex flex-col items-start justify-between">
-      <div className="relative w-full">
-        <img
-          alt={`Flyer de ${show.title}`}
-          src={imageUrl}
-          className="w-full rounded-2xl bg-gray-100 sm:aspect-[2/1] lg:aspect-[0.8/1]"
-        />
-        <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
-      </div>
-      <div className="max-w-xl">
-        <div className="mt-8 flex items-center gap-x-4 text-xs flex-wrap">
+    <article className="flex flex-col items-start">
+      <LazyLoadImage
+        alt={`Flyer de ${show.title}`}
+        src={show.image_url}
+        className="w-full rounded-2xl bg-gray-100 sm:aspect-[2/1] lg:aspect-[0.8/1]"
+        effect="blur"
+      />
+
+      <div className="max-w-xl w-full">
+        <div className="mt-6 flex items-center gap-x-4 text-xs flex-wrap">
           {formattedDate && (
             <time dateTime={show.event_date || ""} className="text-gray-500">
               {formattedDate}
@@ -48,24 +45,48 @@ const Card = ({ show }: CardProps) => {
             </p>
           ))}
         </div>
-        <div className="group relative">
-          <h3 className="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">
-            <p>
-              <span className="absolute inset-0" />
-              {show.title}
-            </p>
-          </h3>
-          {show.venue ? (
-            <p className="mt-5 line-clamp-3 text-sm/6 flex gap-2 text-gray-600">
-              <MapPinIcon width={20} />
-              {`${show.venue}${show.city ? `, ${show.city}` : ""}`}
-            </p>
-          ) : (
-            <p className="mt-5 line-clamp-3 text-sm/6 flex gap-2 h-5 text-gray-600"></p>
-          )}
+
+        <div className="mt-3 flex items-center">
+          <h3 className="text-lg font-semibold text-gray-900">{show.title}</h3>
+          <div className="flex gap-5 ml-4">
+            {show.instagram ? (
+              <a
+                href={`https://www.instagram.com/${show.instagram}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaInstagram size={25} className="text-pink-400" />
+              </a>
+            ) : (
+              <FaInstagram size={25} className="opacity-0" />
+            )}
+            {show.web ? (
+              <a href={show.web} target="_blank" rel="noopener noreferrer">
+                <GlobeAltIcon width={25} className="text-blue-600" />
+              </a>
+            ) : (
+              <GlobeAltIcon width={25} className="opacity-0" />
+            )}
+          </div>
         </div>
-        <div className="mb-6 mt-6 flex items-center gap-x-4">
-          <Button text="Comprar" url={show.url} />
+
+        {show.venue ? (
+          <p className="mt-5 text-sm flex gap-2 text-gray-600">
+            <MapPinIcon width={20} />
+            {`${show.venue}${show.city ? `, ${show.city}` : ""}`}
+          </p>
+        ) : (
+          <div className="mt-5 h-5" />
+        )}
+
+        <div className="mt-6 mb-6">
+          {show.url ? (
+            <Button text="Comprar" url={show.url} />
+          ) : (
+            <div className="opacity-0">
+              <Button text="Comprar" url="#" />
+            </div>
+          )}
         </div>
       </div>
     </article>

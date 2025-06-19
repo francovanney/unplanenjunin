@@ -3,8 +3,9 @@ export interface IShowItem {
   categories: string[];
   city: string;
   completeevent: boolean | null;
-  end_date: Date;
+  end_date: string | null;
   event_date: string | null;
+  image_url: string;
   flyer: {
     type: string;
     data: number[];
